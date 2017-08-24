@@ -1,0 +1,77 @@
+html,
+body {
+    height: 100%;
+    background-image: url('../../Images/bg.jpg');
+}
+
+.menu {
+    background-color: #fff;
+    border-bottom: 4px solid #04A3ED;
+    width: 100%;
+    height: auto;
+    padding: 0 10px;
+    margin: 0 0 2em 0;
+}
+
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.navbar-header {
+    float: left;
+}
+
+.navbar-header>a {
+    font-family: 'Ubuntu Condensed', sans-serif;
+    padding: 0px;
+    margin: 0px;
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+    padding: 5px 30px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    text-align: center;
+    border: solid 1px #FFF;
+    outline: solid 3px #04A3ED;
+}
+
+footer p {
+    padding: 10.5px;
+    padding-top: 0px;
+    margin: 0px;
+    line-height: 100%;
+    float: none;
+}
+
+
+.navbar-header>a:hover {
+	text-decoration: none;
+	color: #04A3ED;
+}
+
+.headerText {
+	font-family: cursive;
+	font-size: 1.3em;
+	color: #04A3ED;
+	padding-top: 1.5em;
+	padding-right: 1em;
+}
+
+.btn-lg .caret {
+	border-width: 5px 5px 0;
+	border-bottom-width: 0
+}
+
+.dropup .btn-lg .caret {
+	border-width: 0 5px 5px
+}

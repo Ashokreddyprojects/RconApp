@@ -1,0 +1,110 @@
+
+.rc-collapse {
+    border: none;
+}
+.rc-collapse-anim-active {
+    transition: height 0.2s ease-out;
+}
+.rc-collapse>.rc-collapse-item {
+    margin-bottom: 2px;
+    background-color: #1b4f72!important;
+    border-radius: .5rem .5rem 0 0;
+    border: 1px solid #d9d9d9;
+}
+.rc-collapse>.rc-collapse-item:first-child {
+    border-top: none;
+}
+.rc-collapse>.rc-collapse-item>.rc-collapse-header {
+    height: 38px;
+    line-height: 38px;
+    text-indent: 16px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.25rem;
+}
+.rc-collapse>.rc-collapse-item>.rc-collapse-header .arrow {
+    display: inline-flex;
+    content: '\20';
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid white;
+    vertical-align: middle;
+    float: right;
+    margin-right: 20px;
+    margin-top: 12px;
+}
+.rc-collapse>.rc-collapse-item-disabled>.rc-collapse-header {
+    cursor: not-allowed;
+    color: #fff;
+    background-color: #f3f3f3;
+}
+.rc-collapse-content {
+    overflow: hidden;
+    color: #5dade2;
+    font-weight: 300;
+    padding: 0 16px;
+    background-color: #fff;
+}
+.rc-collapse-content>.rc-collapse-content-box {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+.rc-collapse-content-inactive {
+    display: none;
+}
+.rc-collapse-item:last-child>.rc-collapse-content {
+    border-radius: 0 0 3px 3px;
+}
+.rc-collapse>.rc-collapse-item-active>.rc-collapse-header .arrow {
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid white;
+    margin-right: 20px;
+}
+
+
+/* Override foundation*/
+.rc-collapse [type=checkbox] {
+    vertical-align: middle !important;
+    margin: auto !important;
+}
+.rc-collapse .multi-select div {
+    max-height: 200px;
+}
+.rc-collapse .react-bs-table-csv-btn {
+    display: none;
+}
+.rc-collapse .coverage-year .Select-clear {
+    display: none;
+}
+.rc-collapse .coverage-year .Select-arrow {
+    all: unset;
+    position: relative;
+    display: inline-block;
+}
+.rc-collapse .coverage-year .Select-arrow:before {
+    font-family: FontAwesome;
+    top: 0;
+    left: -5px;
+    padding-right: 10px;
+    content: "\f073";
+}
+.error {
+    font-size: 0.6em !important;
+    margin-top: 5px;
+    color: red !important;
+    font-weight: 600;
+}
+.date-picker-error{
+    position: absolute;
+    margin-top: -16px;
+}
+.spinner {
+    margin : 100px auto;
+ }
+
+
