@@ -351,7 +351,7 @@ class FieldSummaryDetailPageData extends Component {
     items.push(
       <Panel header={`Search Result`} key={'1'}>
         <div className={'field-summary-result-rf-text display-' + (this.state.recordFlagSelected.length > 0)}> Selected Record Flags :
-          {
+          { 
             this.state.recordFlagSelected.map((r, index) => {
 
               if (this.state.recordFlagOptions.length === this.state.recordFlagSelected.length)

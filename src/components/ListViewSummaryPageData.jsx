@@ -109,6 +109,40 @@ function emptyDataFormatter(cell, row) {
   }
   return `${cell}`;
 }
+
+
+var rcnoListViewRes = [{
+      "recordIdentifier": "RCNI170630115000005",
+      "rcnoFirstName": "ERIN",
+      "rcnoLastName": "HILL",
+      "rcnoExchSubId": "0001567297",
+      "rcnoSocSecNum": "770404680",
+      "rcnoContractId": "RCNI17063",
+      "rcnoFFMPolicyId": "H10162144",
+      "overallInd": "M"
+   },
+      {
+      "recordIdentifier": "RCNI170630115000006",
+      "rcnoFirstName": "TOMMY",
+      "rcnoLastName": "PIIRA",
+      "rcnoExchSubId": "0001798469",
+      "rcnoSocSecNum": "594957396",
+      "rcnoContractId": "RCNI17063",
+      "rcnoFFMPolicyId": "H10166177",
+      "overallInd": "M"
+   },
+      {
+      "recordIdentifier": "RCNI170630115000015",
+      "rcnoFirstName": "JACK",
+      "rcnoLastName": "SHANHOLTZ",
+      "rcnoExchSubId": "0002417445",
+      "rcnoSocSecNum": "356940018",
+      "rcnoContractId": "RCNI17063",
+      "rcnoFFMPolicyId": "H10202275",
+      "overallInd": "C"
+   }];
+
+
 class ListViewSummaryPageData extends Component {
   constructor(props) {
     super(props);
@@ -123,6 +157,7 @@ class ListViewSummaryPageData extends Component {
       'handleFieldFlagChange',
       'handleRecordFlagChange',
       'handleFieldNameChange',
+      'handleFieldNameChange1',
       'handleMultiSelectRenderer',
       'handleSubmitButton',
       'handleResetButton',
@@ -140,6 +175,7 @@ class ListViewSummaryPageData extends Component {
       fieldFlagSelected: this.props.defaultFieldFlags,
       recordFlagSelected: this.props.defaultRecordFlags,
       fieldNameSelected: this.props.defaultFieldNames,
+      fieldNameSelected1: this.props.defaultFieldNames1,
       fieldNameOptions: this.props.fieldNameOptions,
       recordFlagOptions: this.props.recordFlagOptions,
       fieldFlagOptions: this.props.fieldFlagOptions,
@@ -209,6 +245,9 @@ class ListViewSummaryPageData extends Component {
   handleFieldNameChange(selected) {
     this.setState({ fieldNameSelected: selected });
   }
+     handleFieldNameChange1(selected) {
+    this.setState({ fieldNameSelected1: selected });
+  }
   handleSubmitButton() {
     console.log('handleSubmitButton()');
     let state = JSON.parse(JSON.stringify(this.state));
@@ -270,7 +309,8 @@ class ListViewSummaryPageData extends Component {
       tradSelected: JSON.parse(JSON.stringify(initialState.tradSelected)),
       fieldFlagSelected: JSON.parse(JSON.stringify(initialState.fieldFlagSelected)),
       recordFlagSelected: JSON.parse(JSON.stringify(initialState.recordFlagSelected)),
-      fieldNameSelected: JSON.parse(JSON.stringify(initialState.fieldNameSelected))
+      fieldNameSelected: JSON.parse(JSON.stringify(initialState.fieldNameSelected)),
+      fieldNameSelected1: JSON.parse(JSON.stringify(initialState.fieldNameSelected1))
     }, () => {
       console.log("Resetting State");
       console.log(this.state);
@@ -385,7 +425,7 @@ class ListViewSummaryPageData extends Component {
                             <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
                                 Field Name:*
                           <MultiSelect
-                                    options={this.props.fieldNameOptions}
+                                    options={this.props.tradingPartnerOptions}
                                     onSelectedChanged={this.handleFieldNameChange}
                                     selected={this.state.fieldNameSelected}
                                     valueRenderer={this.handleMultiSelectRenderer}
@@ -469,9 +509,9 @@ class ListViewSummaryPageData extends Component {
                                <label className='formLabel' style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
                                 Field Name:
                           <MultiSelect
-                                    options={this.props.fieldNameOptions}
-                                    onSelectedChanged={this.handleFieldNameChange}
-                                    selected={this.state.fieldNameSelected}
+                                    options={this.props.rcnoLstFldNm}
+                                    onSelectedChanged={this.handleFieldNameChange1}
+                                    selected={this.state.fieldNameSelected1}
                                     valueRenderer={this.handleMultiSelectRenderer}
                                      selectAllLabel={"All"}
                                      />
@@ -523,7 +563,7 @@ class ListViewSummaryPageData extends Component {
         );
     items.push(
       <Panel header={`Search Result`} key={'1'}>
-        <div className={'display-' + !this.state.showTable}
+      {/*  <div className={'display-' + !this.state.showTable}
           style={{ "textAlign": "center", "color": "darkgoldenrod", "fontWeight": "bolder", "fontStyle": "italic", "fontFamily": "serif", "fontSize": "26px" }}>
           <p className={'display-' + !this.state.showSpinner}>No Data Available for selected Range</p>
           <Spinner
@@ -531,10 +571,27 @@ class ListViewSummaryPageData extends Component {
             spinnerColor={"#5dade2"}
             spinnerWidth={2}
             visible={this.state.showSpinner && !this.state.showTable} />
-        </div>
-        <div className={'display-' + this.state.showTable}>
+        </div> 
+        <div className={'display-' + this.state.showTable} >
+             */}
+            <div>
           <br /><br />
-          <BootstrapTable
+      
+                
+                 <BootstrapTable data={this.props.rcnoListViewResTable} striped hover>
+      <TableHeaderColumn isKey dataField='recordIdentifier' width={'200'}>recordIdentifier</TableHeaderColumn>
+      <TableHeaderColumn dataField='rcnoFirstName' width={'150'}>rcnoFirstName</TableHeaderColumn>
+      <TableHeaderColumn dataField='rcnoLastName' width={'150'}>rcnoLastName</TableHeaderColumn>
+      <TableHeaderColumn dataField='rcnoExchSubId' width={'150'}>rcnoExchSubId</TableHeaderColumn>
+      <TableHeaderColumn dataField='rcnoSocSecNum' width={'150'}>rcnoSocSecNum</TableHeaderColumn>
+      <TableHeaderColumn dataField='rcnoContractId' width={'150'}>rcnoContractId</TableHeaderColumn>
+      <TableHeaderColumn dataField='rcnoFFMPolicyId' width={'150'}>rcnoFFMPolicyId</TableHeaderColumn>
+      <TableHeaderColumn dataField='overallInd' width={'150'}>overallInd</TableHeaderColumn>
+  </BootstrapTable>
+                
+                
+                
+        {/*   <BootstrapTable
             data={this.state.summaryTableData}
             height='300'
             scrollTop={'Top'}
@@ -563,7 +620,7 @@ class ListViewSummaryPageData extends Component {
                 )
               })
             }
-          </BootstrapTable>
+          </BootstrapTable>  */}
           <br />
           <Row>
             {/* <Column medium={1} offsetOnMedium={10}> */}
@@ -640,7 +697,8 @@ class ListViewSummaryPageData extends Component {
         tradSelected: JSON.parse(JSON.stringify(this.state.tradSelected)),
         fieldFlagSelected: JSON.parse(JSON.stringify(this.state.fieldFlagSelected)),
         recordFlagSelected: JSON.parse(JSON.stringify(this.state.recordFlagSelected)),
-        fieldNameSelected: JSON.parse(JSON.stringify(this.state.fieldNameSelected))
+        fieldNameSelected: JSON.parse(JSON.stringify(this.state.fieldNameSelected)),
+        fieldNameSelected1: JSON.parse(JSON.stringify(this.state.fieldNameSelected1))
       };
       console.log(initialState);
     }

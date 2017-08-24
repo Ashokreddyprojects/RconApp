@@ -32,6 +32,57 @@ const tradingPartnerOptions = [
         value: 2
     }
 ];
+
+const rcnoLstFldNm = [
+    {
+        label: 'FFM Last Name',
+        id: 'FFM_MBR_LAST_NM',
+        value: 0
+    }, {
+        label: 'FFM Member Middle Name',
+        id: 'FFM_MBR_MIDL_NM',
+        value: 1
+    }, {
+        label: 'FFM DOB',
+        id: 'FFM_BTH_DT',
+        value: 2
+    }
+];
+
+
+
+var rcnoListViewResTable = [{
+      "recordIdentifier": "RCNI170630115000005",
+      "rcnoFirstName": "ERIN",
+      "rcnoLastName": "HILL",
+      "rcnoExchSubId": "0001567297",
+      "rcnoSocSecNum": "770404680",
+      "rcnoContractId": "RCNI17063",
+      "rcnoFFMPolicyId": "H10162144",
+      "overallInd": "M"
+   },
+      {
+      "recordIdentifier": "RCNI170630115000006",
+      "rcnoFirstName": "TOMMY",
+      "rcnoLastName": "PIIRA",
+      "rcnoExchSubId": "0001798469",
+      "rcnoSocSecNum": "594957396",
+      "rcnoContractId": "RCNI17063",
+      "rcnoFFMPolicyId": "H10166177",
+      "overallInd": "M"
+   },
+      {
+      "recordIdentifier": "RCNI170630115000015",
+      "rcnoFirstName": "JACK",
+      "rcnoLastName": "SHANHOLTZ",
+      "rcnoExchSubId": "0002417445",
+      "rcnoSocSecNum": "356940018",
+      "rcnoContractId": "RCNI17063",
+      "rcnoFFMPolicyId": "H10202275",
+      "overallInd": "C"
+   }];
+
+
 //----------------------Field Flag Options without service-----------------
 // const fieldFlagOptions = {
 //     "fieldLvlList": [
@@ -133,7 +184,8 @@ class ListViewSummaryPage extends Component {
         const defaultTradingPartners = [0, 1, 2];
         const defaultRecordFlags = [3, 9, 10];
         const defaultFieldFlags = [4, 5, 6, 7];
-        const defaultFieldNames = [0, 1, 2, 3, 4];
+        const defaultFieldNames = [0, 1, 2];
+        const defaultFieldNames1 = [0, 1, 2];
 
 
 
@@ -151,6 +203,7 @@ class ListViewSummaryPage extends Component {
             fieldFlagOptions: [],
             lastDataReceived: Date.now(),
             defaultFieldNames,
+            defaultFieldNames1,
             defaultFieldFlags,
             defaultRecordFlags
         };
@@ -274,12 +327,16 @@ class ListViewSummaryPage extends Component {
                             </div>
                             <br /> */}
                             <ListViewSummaryPageData
+                                rcnoListViewResTable={rcnoListViewResTable}
+                                rcnoLstFldNm={rcnoLstFldNm}
+                                tradingPartnerOptions={tradingPartnerOptions}
                                 covYearOptions={covYearOptions}
                                 lastDataReceived={this.state.lastDataReceived}
                                 defaultCovYear={this.state.covYear}
                                 defaultRecordFlags={this.state.defaultRecordFlags}
                                 defaultFieldFlags={this.state.defaultFieldFlags}
                                 defaultFieldNames={this.state.defaultFieldNames}
+                                defaultFieldNames1={this.state.defaultFieldNames1}
                                 defaultTradingPartners={this.state.defaultTradingPartners}
                                 tradingPartnerOptions={tradingPartnerOptions}
                                 fieldFlagOptions={this.state.fieldFlagOptions}
