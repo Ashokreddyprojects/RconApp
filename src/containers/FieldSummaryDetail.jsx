@@ -77,7 +77,7 @@ const resultData = {
     }
 };
 
-//---------------------- Options without service
+//---------------------- Options without service 
 const fieldFlagOptions = {
     "fieldLvlList": [
         "C",

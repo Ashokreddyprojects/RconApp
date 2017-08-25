@@ -111,49 +111,27 @@ function emptyDataFormatter(cell, row) {
 }
 
 
-var rcnoListViewRes = [{
-      "recordIdentifier": "RCNI170630115000005",
-      "rcnoFirstName": "ERIN",
-      "rcnoLastName": "HILL",
-      "rcnoExchSubId": "0001567297",
-      "rcnoSocSecNum": "770404680",
-      "rcnoContractId": "RCNI17063",
-      "rcnoFFMPolicyId": "H10162144",
-      "overallInd": "M"
-   },
-      {
-      "recordIdentifier": "RCNI170630115000006",
-      "rcnoFirstName": "TOMMY",
-      "rcnoLastName": "PIIRA",
-      "rcnoExchSubId": "0001798469",
-      "rcnoSocSecNum": "594957396",
-      "rcnoContractId": "RCNI17063",
-      "rcnoFFMPolicyId": "H10166177",
-      "overallInd": "M"
-   },
-      {
-      "recordIdentifier": "RCNI170630115000015",
-      "rcnoFirstName": "JACK",
-      "rcnoLastName": "SHANHOLTZ",
-      "rcnoExchSubId": "0002417445",
-      "rcnoSocSecNum": "356940018",
-      "rcnoContractId": "RCNI17063",
-      "rcnoFFMPolicyId": "H10202275",
-      "overallInd": "C"
-   }];
-
 
 class ListViewSummaryPageData extends Component {
+    
+    
   constructor(props) {
     super(props);
+      
+      console.log("check data:",this.props.recordFlagOptions1)
+      console.log("check data:",this.props.rcnoLstFldNm)
+      
     cxt = this;
     this.state = this.getInitialState();
     [
       'getItems',
       'onChange',
       'handleDateChange',
+      'handleDateChange1',
       'handleTradPartChange',
       'handleCovYearChange',
+      'fieldNameChange',
+      'fieldNameChange1',
       'handleFieldFlagChange',
       'handleRecordFlagChange',
       'handleFieldNameChange',
@@ -161,6 +139,7 @@ class ListViewSummaryPageData extends Component {
       'handleMultiSelectRenderer',
       'handleSubmitButton',
       'handleResetButton',
+        'logChange',
       'handleExport'
     ].map(fn => this[fn] = this[fn].bind(this));
   }
@@ -168,16 +147,20 @@ class ListViewSummaryPageData extends Component {
     return {
       accordion: true,
       activeKey: ['1'],
+        fieldLabelName:this.props.defaultFieldLabelNames,
       // startDate: moment(),
+        startDate1: moment().subtract(1, 'month'),
       startDate: moment().subtract(1, 'month'),
       covYear: this.props.defaultCovYear,
       tradSelected: this.props.defaultTradingPartners,
-      fieldFlagSelected: this.props.defaultFieldFlags,
+      fieldFlagSelected: this.props.defaultfieldFlagOptions1,
       recordFlagSelected: this.props.defaultRecordFlags,
       fieldNameSelected: this.props.defaultFieldNames,
       fieldNameSelected1: this.props.defaultFieldNames1,
+        
+      recordFlagSelected: this.props.defaultrecordFlagOptions1,
       fieldNameOptions: this.props.fieldNameOptions,
-      recordFlagOptions: this.props.recordFlagOptions,
+     
       fieldFlagOptions: this.props.fieldFlagOptions,
       selectRowProp: {
         mode: 'checkbox',
@@ -195,12 +178,22 @@ class ListViewSummaryPageData extends Component {
       errStr: []
     };
   }
+    
+    logChange(val) {
+  console.log("Selected: " + JSON.stringify(val));
+}
+    
   onChange(activeKey) {
     this.setState({ activeKey });
   }
   handleDateChange(date) {
     this.setState({ startDate: date });
   }
+    
+    
+  handleDateChange1(date) {
+    this.setState({ startDate1: date });
+  }    
   onExportToCSV() {
     const selectedRows = cxt.refs.table.state.selectedRowKeys;
     console.log(selectedRows);
@@ -223,6 +216,22 @@ class ListViewSummaryPageData extends Component {
   handleTradPartChange(selected) {
     this.setState({ tradSelected: selected });
   }
+    
+    
+    fieldNameChange(val)
+    {
+        
+         
+    this.setState({ fieldName: val.label });
+        
+    }    fieldNameChange1(val)
+    {
+        
+         console.log("test",val);
+    this.setState({ fieldLabelName: val.label });
+        
+    }
+    
   handleCovYearChange(val) {
     console.log(val);
     this.setState({ covYear: val.label });
@@ -236,6 +245,8 @@ class ListViewSummaryPageData extends Component {
     }
     return `Selected (${selected.length})`;
   }
+    
+ 
   handleFieldFlagChange(selected) {
     this.setState({ fieldFlagSelected: selected });
   }
@@ -251,7 +262,7 @@ class ListViewSummaryPageData extends Component {
   handleSubmitButton() {
     console.log('handleSubmitButton()');
     let state = JSON.parse(JSON.stringify(this.state));
-    console.log(state);
+    console.log("handleSubmitButton",state);
     let pass = true;
     let errStr = [];
     // validate covYear
@@ -292,6 +303,7 @@ class ListViewSummaryPageData extends Component {
       pass = false;
       errStr[5] = "Field Required";
     }
+      pass = true;
     if (pass) {
       this
         .props
@@ -304,6 +316,8 @@ class ListViewSummaryPageData extends Component {
     console.log(initialState);
     this.setState({
       // startDate: moment(),
+    
+      startDate1: moment().subtract(1, 'month'),
       startDate: moment().subtract(1, 'month'),
       covYear: JSON.parse(JSON.stringify(initialState.covYear)),
       tradSelected: JSON.parse(JSON.stringify(initialState.tradSelected)),
@@ -375,7 +389,7 @@ class ListViewSummaryPageData extends Component {
                             <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
                                 Field Flag:*
                              <MultiSelect
-                                    options={this.props.fieldFlagOptions}
+                                    options={this.props.fieldFlagOptions1}
                                     onSelectedChanged={this.handleFieldFlagChange}
                                     selected={this.state.fieldFlagSelected}
                                     valueRenderer={this.handleMultiSelectRenderer}
@@ -399,7 +413,7 @@ class ListViewSummaryPageData extends Component {
                             <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
                                 Record Flag:*
                              <MultiSelect
-                                    options={this.props.recordFlagOptions}
+                                    options={this.props.recordFlagOptions1}
                                     onSelectedChanged={this.handleRecordFlagChange}
                                     selected={this.state.recordFlagSelected}
                                     valueRenderer={this.handleMultiSelectRenderer}
@@ -462,8 +476,8 @@ class ListViewSummaryPageData extends Component {
                                 Issuer DOB:
                          <DatePicker
                                     ref='fileRunDPicker'
-                                    selected={this.state.startDate}
-                                    onChange={this.handleDateChange}
+                                    selected={this.state.startDate1}
+                                    onChange={this.handleDateChange1}
                                     placeholderText="MM/DD/YYYY"
                                     dateFormat="MM/DD/YYYY"
                                     showYearDropdown
@@ -508,13 +522,16 @@ class ListViewSummaryPageData extends Component {
                             <Column medium={4} className="multi-select">
                                <label className='formLabel' style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
                                 Field Name:
-                          <MultiSelect
-                                    options={this.props.rcnoLstFldNm}
-                                    onSelectedChanged={this.handleFieldNameChange1}
-                                    selected={this.state.fieldNameSelected1}
-                                    valueRenderer={this.handleMultiSelectRenderer}
-                                     selectAllLabel={"All"}
-                                     />
+                                  <Select
+                                value={this.state.fieldLabelName}
+                                options={this.props.rcnoLstFldNm}
+                                onChange={this.fieldNameChange1} /> 
+                                   {/*  <Select
+                                   name="form-field-name"
+                                  value={this.state.fieldName}
+                                   options={this.props.rcnoLstFldNm}
+                                  onChange={this.logChange} /> */}
+                                         
                                 <span className="error">{this.state.errStr[5]}</span>
                             </label>
                             </Column>
@@ -698,9 +715,10 @@ class ListViewSummaryPageData extends Component {
         fieldFlagSelected: JSON.parse(JSON.stringify(this.state.fieldFlagSelected)),
         recordFlagSelected: JSON.parse(JSON.stringify(this.state.recordFlagSelected)),
         fieldNameSelected: JSON.parse(JSON.stringify(this.state.fieldNameSelected)),
-        fieldNameSelected1: JSON.parse(JSON.stringify(this.state.fieldNameSelected1))
+        fieldNameSelected1: JSON.parse(JSON.stringify(this.state.fieldNameSelected1)),
+        fieldLabelName:JSON.parse(JSON.stringify(this.state.fieldLabelName))
       };
-      console.log(initialState);
+      console.log("initialState:",initialState);
     }
   }
 }
