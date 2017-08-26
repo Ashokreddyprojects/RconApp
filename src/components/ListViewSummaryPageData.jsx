@@ -140,13 +140,25 @@ class ListViewSummaryPageData extends Component {
       'handleSubmitButton',
       'handleResetButton',
         'logChange',
-      'handleExport'
+      'handleExport',
+        
+        
+     'issuerExSubID',
+     'issuerFfmPolicyId',
+    'issuerRecordTraceNumber',
+        'issuerFirstName',
+        'issuerLastName'
     ].map(fn => this[fn] = this[fn].bind(this));
   }
   getInitialState() {
     return {
       accordion: true,
       activeKey: ['1'],
+        IssuerExSubIDValue:'',
+        issuerFfmPolicyId:'',
+        issuerRecordTraceNumber:'',
+        issuerFirstName:'',
+        issuerLastName:'',
         fieldLabelName:this.props.defaultFieldLabelNames,
       // startDate: moment(),
         startDate1: moment().subtract(1, 'month'),
@@ -178,6 +190,37 @@ class ListViewSummaryPageData extends Component {
       errStr: []
     };
   }
+    
+    issuerExSubID(event)
+    {
+     
+       this.setState({IssuerExSubIDValue: event.target.value}); 
+        
+    }   
+    issuerFfmPolicyId(event)
+    {
+        //console.log("issuerFfmPolicyId",event)
+       this.setState({issuerFfmPolicyId: event.target.value}); 
+        
+    } 
+    issuerRecordTraceNumber(event)
+    {
+       // console.log("issuerRecordTraceNumber",event)
+       this.setState({issuerRecordTraceNumber: event.target.value}); 
+        
+    }  
+    issuerFirstName(event)
+    {
+        console.log("issuerFirstName",event)
+       this.setState({issuerFirstName: event.target.value}); 
+        
+    }
+     issuerLastName(event)
+    {
+        console.log("issuerLastName",event)
+       this.setState({issuerLastName: event.target.value}); 
+        
+    }
     
     logChange(val) {
   console.log("Selected: " + JSON.stringify(val));
@@ -215,6 +258,8 @@ class ListViewSummaryPageData extends Component {
   }
   handleTradPartChange(selected) {
     this.setState({ tradSelected: selected });
+   
+      
   }
     
     
@@ -247,8 +292,12 @@ class ListViewSummaryPageData extends Component {
   }
     
  
-  handleFieldFlagChange(selected) {
+  handleFieldFlagChange(selected,options) {
     this.setState({ fieldFlagSelected: selected });
+      
+      var handleMultiSelectRendererArry=[];
+      console.log("handleMultiSelectRendererArry")
+      
   }
   handleRecordFlagChange(selected) {
     this.setState({ recordFlagSelected: selected });
@@ -272,7 +321,11 @@ class ListViewSummaryPageData extends Component {
     }
     // validate moment object
     const startDate = this.refs.fileRunDPicker.refs.input.defaultValue;
-    if (!startDate || startDate.length !== 7) {
+       console.log("startDate111",startDate)
+      console.log("startDate111",!startDate)
+      console.log("startDate111",(startDate.length !== 7))
+      
+    if (!startDate) {
       pass = false;
       errStr[0] = "Field Required";
     }
@@ -303,7 +356,7 @@ class ListViewSummaryPageData extends Component {
       pass = false;
       errStr[5] = "Field Required";
     }
-      pass = true;
+    
     if (pass) {
       this
         .props
@@ -324,7 +377,12 @@ class ListViewSummaryPageData extends Component {
       fieldFlagSelected: JSON.parse(JSON.stringify(initialState.fieldFlagSelected)),
       recordFlagSelected: JSON.parse(JSON.stringify(initialState.recordFlagSelected)),
       fieldNameSelected: JSON.parse(JSON.stringify(initialState.fieldNameSelected)),
-      fieldNameSelected1: JSON.parse(JSON.stringify(initialState.fieldNameSelected1))
+      fieldNameSelected1: JSON.parse(JSON.stringify(initialState.fieldNameSelected1)),
+             IssuerExSubIDValue:'',
+        issuerFfmPolicyId:'',
+        issuerRecordTraceNumber:'',
+        issuerFirstName:'',
+        issuerLastName:''
     }, () => {
       console.log("Resetting State");
       console.log(this.state);
@@ -353,10 +411,11 @@ class ListViewSummaryPageData extends Component {
                                         ref='fileRunDPicker'
                                         selected={this.state.startDate}
                                         onChange={this.handleDateChange}
-                                        dateFormat="MM/YYYY"
-                                        showMonthDropdown
-                                        showYearDropdown
-                                        scrollableYearDropdown />
+                                          dateFormat="MM/YYYY"
+                                          placeholderText="MM/YYYY"
+                                          showMonthDropdown
+                                          showYearDropdown
+                                          scrollableYearDropdown />
                                     <span className="error date-picker-error">{this.state.errStr[0]}</span>
                                 </label>
                             </Column>
@@ -461,14 +520,14 @@ class ListViewSummaryPageData extends Component {
                             <Column medium={4}>
                                 <label className="formLabel" style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
                                     Issuer First Name:
-                  <input type="text" name="issuerFirstName" />
+                  <input type="text" name="issuerFirstName"  value={this.state.issuerFirstName} onChange={this.issuerFirstName} />
                                 </label>
                             </Column>
                         </div>
                         <Column medium={4}>
                             <label className="formLabel" style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
                                 Issuer Last Name:
-                  <input type="text" name="issuerLastName" />
+                  <input type="text" name="issuerLastName"  value={this.state.issuerLastName} onChange={this.issuerLastName} />
                             </label>
                         </Column>
                         <Column medium={3}>
@@ -492,7 +551,7 @@ class ListViewSummaryPageData extends Component {
                                 <label className="formLabel"
                                     style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
                                     Issuer Ex Sub ID:
-                  <input type="text" name="issuerExSubId" />
+                  <input type="text" name="issuerExSubId"  value={this.state.IssuerExSubIDValue} onChange={this.issuerExSubID} />
                                 </label>
                             </Column>
                         </div>
@@ -500,14 +559,14 @@ class ListViewSummaryPageData extends Component {
                             <label className="formLabel"
                                 style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
                                 Issuer FFM Policy ID:
-                  <input type="text" name="issuerFfmPolicyId" />
+                <input type="text" name="issuerFfmPolicyId"  value={this.state.issuerFfmPolicyId} onChange={this.issuerFfmPolicyId}/>
                             </label>
                         </Column>
                         <Column medium={3}>
                             <label className="formLabel"
                                 style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
                                 Issuer Record Trace Number:
-                  <input type="text" name="issuerRecordTraceNumber" />
+              <input type="text" name="issuerRecordTraceNumber" value={this.state.issuerRecordTraceNumber} onChange={this.issuerRecordTraceNumber} />
                             </label>
                         </Column>
                     </Row>
@@ -716,7 +775,7 @@ class ListViewSummaryPageData extends Component {
         recordFlagSelected: JSON.parse(JSON.stringify(this.state.recordFlagSelected)),
         fieldNameSelected: JSON.parse(JSON.stringify(this.state.fieldNameSelected)),
         fieldNameSelected1: JSON.parse(JSON.stringify(this.state.fieldNameSelected1)),
-        fieldLabelName:JSON.parse(JSON.stringify(this.state.fieldLabelName))
+        fieldLabelName:JSON.parse(JSON.stringify(this.state.fieldLabelName))        
       };
       console.log("initialState:",initialState);
     }

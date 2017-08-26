@@ -347,14 +347,19 @@ class ListViewSummaryPage extends Component {
             fieldNameSelected = fieldNameSelected.slice(0, -1);
         }*/
         
-                 this.apiCallFunction({
-  "frmDate": "06/2017",
-  "tpId" : "ALL",
-  "cvgYear" : "2017",
-  "rcdFlag" : "ALL",
-  "fldFlag" : "ALL",
-  "fldName" : "ALL", 
-});
+               this.apiCallFunction( {
+        "name": "paul rudd",
+        "movies": ["I Love You Man", "Role Models"]
+    });
+        
+//                 this.apiCallFunction({
+//  "frmDate": "06/2017",
+//  "tpId" : "ALL",
+//  "cvgYear" : "2017",
+//  "rcdFlag" : "ALL",
+//  "fldFlag" : "ALL",
+//  "fldName" : "ALL", 
+//});
         // this.getResultSummary({
         //     fromDate: moment(item.state.startDate).format('MM/YYYY'),
         //     coverageYear: item.state.covYear,
@@ -457,14 +462,20 @@ class ListViewSummaryPage extends Component {
     }
     componentDidMount() {
         
-    this.apiCallFunction({
-  "frmDate": "06/2017",
-  "tpId" : "ALL",
-  "cvgYear" : "2017",
-  "rcdFlag" : "ALL",
-  "fldFlag" : "ALL",
-  "fldName" : "ALL", 
-});
+//    this.apiCallFunction({
+//  "frmDate": "06/2017",
+//  "tpId" : "ALL",
+//  "cvgYear" : "2017",
+//  "rcdFlag" : "ALL",
+//  "fldFlag" : "ALL",
+//  "fldName" : "ALL", 
+//});
+        
+         this.apiCallFunction( {
+        "name": "paul rudd",
+        "movies": ["I Love You Man", "Role Models"]
+    });
+        
         
         this.getInputFields();
     }
@@ -556,7 +567,7 @@ class ListViewSummaryPage extends Component {
           console.log("argsApi");
           console.log(argsApi);
         //----------------------your api service call-----------------
-         var url="https://blj8082.github.io/ApiData/ReconData.json";
+         var url="https://reqres.in/api/users";
         //----------------------your api service call-----------------
                
             fetch(url, {
@@ -574,23 +585,24 @@ class ListViewSummaryPage extends Component {
                  return response.json();
             })
             .then((response) => {
+                console.log("response");
             console.log(response);
              
-           this.setState({
-                    rcnoListViewResTable: response.rcnoListViewRes
-                });
+//           this.setState({
+//                    rcnoListViewResTable: response.rcnoListViewRes
+//                });
         })
             .catch((error) => {
             console.log(error);
                  console.log("catch function");
-            // Dummy Code for Testing;
-            let response = rcnoListViewResTable;
-            let data = response;
-          
-                this.setState({rcnoListViewResTable: rcnoListViewResTable});
-         
-                
-                console.log(this.state.rcnoListViewResTable);
+//            // Dummy Code for Testing;
+//            let response = rcnoListViewResTable;
+//            let data = response;
+//          
+//                this.setState({rcnoListViewResTable: rcnoListViewResTable});
+//         
+//                
+//                console.log(this.state.rcnoListViewResTable);
         })
         
         
