@@ -16,42 +16,43 @@ import MultiSelect from '@khanacademy/react-multi-select';
 import ReactDOM from 'react-dom'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import Spinner from 'react-spinner-material';
-import ReactHover from 'react-hover'
+import ReactHover from 'react-hover';
+import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 // import FieldFlagsHelp from './FieldFlagsHelp'
 // import RecordFlagsFeildSummaryHelp from './RecordFlagsFeildSummaryHelp'
 import { Tabs, TabLink, TabContent } from 'react-tabs-redux';
 const styles = {
-    tabs: {
-        width: '100%',
-        display: 'inline-block',
-        marginRight: '30px',
-        verticalAlign: 'top'
-    },
-    links: {
-        margin: '0 auto',
-        padding: '0 10em'
-    },
-    tabLink: {
-        height: '30px',
-        lineHeight: '30px',
-        padding: '0 15px',
-        cursor: 'pointer',
-        borderBottom: '2px solid transparent',
-        display: 'inline-block'
-    },
-    tabContent: {
-        width:'100%'
-    },
-    activeLinkStyle: {
-        borderBottom: '2px solid #333'
-    },
-    visibleTabStyle: {
-        display: 'inline-block'
-    },
-    content: {
-        width:'100%',
-        padding: '1em'
-    }
+  tabs: {
+    width: '100%',
+    display: 'inline-block',
+    marginRight: '30px',
+    verticalAlign: 'top'
+  },
+  links: {
+    margin: '0 auto',
+    padding: '0 10em'
+  },
+  tabLink: {
+    height: '30px',
+    lineHeight: '30px',
+    padding: '0 15px',
+    cursor: 'pointer',
+    borderBottom: '2px solid transparent',
+    display: 'inline-block'
+  },
+  tabContent: {
+    width: '100%'
+  },
+  activeLinkStyle: {
+    borderBottom: '2px solid #333'
+  },
+  visibleTabStyle: {
+    display: 'inline-block'
+  },
+  content: {
+    width: '100%',
+    padding: '1em'
+  }
 };
 
 
@@ -62,7 +63,46 @@ const recordFlagHelpHoverOptions = {
 // this context
 let cxt;
 
-
+const products=[{"id":1,"name":"Leonelle","price":253},
+{"id":2,"name":"Carlotta","price":309},
+{"id":3,"name":"Bettye","price":119},
+{"id":4,"name":"Carmelita","price":404},
+{"id":5,"name":"Phillie","price":111},
+{"id":6,"name":"Tori","price":312},
+{"id":7,"name":"Harrie","price":450},
+{"id":8,"name":"Rennie","price":197},
+{"id":9,"name":"Elicia","price":362},
+{"id":10,"name":"Issy","price":392},
+{"id":11,"name":"Essie","price":441},
+{"id":12,"name":"Nettie","price":119},
+{"id":13,"name":"Florenza","price":221},
+{"id":14,"name":"Loralee","price":319},
+{"id":15,"name":"Krissie","price":271},
+{"id":16,"name":"Justine","price":228},
+{"id":17,"name":"June","price":428},
+{"id":18,"name":"Emelia","price":197},
+{"id":19,"name":"Jobye","price":418},
+{"id":20,"name":"Ardis","price":317},
+{"id":21,"name":"Lorenza","price":413},
+{"id":22,"name":"Gussie","price":184},
+{"id":23,"name":"Saloma","price":139},
+{"id":24,"name":"Celestia","price":205},
+{"id":25,"name":"Elinore","price":389},
+{"id":26,"name":"Stormie","price":100},
+{"id":27,"name":"Kirbie","price":433},
+{"id":28,"name":"Viviana","price":289},
+{"id":29,"name":"Maggee","price":330},
+{"id":30,"name":"Adrea","price":383},
+{"id":31,"name":"Carlye","price":194},
+{"id":32,"name":"Ranee","price":278},
+{"id":33,"name":"Christal","price":150},
+{"id":34,"name":"Billi","price":448},
+{"id":35,"name":"Miranda","price":394},
+{"id":36,"name":"Rosemary","price":264},
+{"id":37,"name":"Midge","price":268},
+{"id":38,"name":"Martina","price":106},
+{"id":39,"name":"Lizzie","price":488},
+{"id":40,"name":"Helen","price":209}]
 
 function dynamicHeaderSortFunc(a, b, order, sortField) { // order is desc or asc
   let a1 = a[sortField] === undefined ? '0' : a[sortField].split('%')[0];
@@ -109,70 +149,46 @@ function emptyDataFormatter(cell, row) {
   }
   return `${cell}`;
 }
-
-
+function trClassFormat(row, rIndex) {
+  return row.flag == '-'
+    ? 'grand-total-highlight'
+    : '';
+}
 
 class ListViewSummaryPageData extends Component {
-    
-    
   constructor(props) {
     super(props);
-      
-      console.log("check data:",this.props.recordFlagOptions1)
-      console.log("check data:",this.props.rcnoLstFldNm)
-      
     cxt = this;
     this.state = this.getInitialState();
     [
       'getItems',
       'onChange',
       'handleDateChange',
-      'handleDateChange1',
       'handleTradPartChange',
       'handleCovYearChange',
-      'fieldNameChange',
-      'fieldNameChange1',
       'handleFieldFlagChange',
       'handleRecordFlagChange',
       'handleFieldNameChange',
-      'handleFieldNameChange1',
       'handleMultiSelectRenderer',
       'handleSubmitButton',
       'handleResetButton',
-        'logChange',
-      'handleExport',
-        
-        
-     'issuerExSubID',
-     'issuerFfmPolicyId',
-    'issuerRecordTraceNumber',
-        'issuerFirstName',
-        'issuerLastName'
+      'handleExport'
     ].map(fn => this[fn] = this[fn].bind(this));
   }
+
   getInitialState() {
     return {
       accordion: true,
       activeKey: ['1'],
-        IssuerExSubIDValue:'',
-        issuerFfmPolicyId:'',
-        issuerRecordTraceNumber:'',
-        issuerFirstName:'',
-        issuerLastName:'',
-        fieldLabelName:this.props.defaultFieldLabelNames,
       // startDate: moment(),
-        startDate1: moment().subtract(1, 'month'),
       startDate: moment().subtract(1, 'month'),
       covYear: this.props.defaultCovYear,
       tradSelected: this.props.defaultTradingPartners,
-      fieldFlagSelected: this.props.defaultfieldFlagOptions1,
+      fieldFlagSelected: this.props.defaultFieldFlags,
       recordFlagSelected: this.props.defaultRecordFlags,
       fieldNameSelected: this.props.defaultFieldNames,
-      fieldNameSelected1: this.props.defaultFieldNames1,
-        
-      recordFlagSelected: this.props.defaultrecordFlagOptions1,
       fieldNameOptions: this.props.fieldNameOptions,
-     
+      recordFlagOptions: this.props.recordFlagOptions,
       fieldFlagOptions: this.props.fieldFlagOptions,
       selectRowProp: {
         mode: 'checkbox',
@@ -190,53 +206,12 @@ class ListViewSummaryPageData extends Component {
       errStr: []
     };
   }
-    
-    issuerExSubID(event)
-    {
-     
-       this.setState({IssuerExSubIDValue: event.target.value}); 
-        
-    }   
-    issuerFfmPolicyId(event)
-    {
-        //console.log("issuerFfmPolicyId",event)
-       this.setState({issuerFfmPolicyId: event.target.value}); 
-        
-    } 
-    issuerRecordTraceNumber(event)
-    {
-       // console.log("issuerRecordTraceNumber",event)
-       this.setState({issuerRecordTraceNumber: event.target.value}); 
-        
-    }  
-    issuerFirstName(event)
-    {
-        console.log("issuerFirstName",event)
-       this.setState({issuerFirstName: event.target.value}); 
-        
-    }
-     issuerLastName(event)
-    {
-        console.log("issuerLastName",event)
-       this.setState({issuerLastName: event.target.value}); 
-        
-    }
-    
-    logChange(val) {
-  console.log("Selected: " + JSON.stringify(val));
-}
-    
   onChange(activeKey) {
     this.setState({ activeKey });
   }
   handleDateChange(date) {
     this.setState({ startDate: date });
   }
-    
-    
-  handleDateChange1(date) {
-    this.setState({ startDate1: date });
-  }    
   onExportToCSV() {
     const selectedRows = cxt.refs.table.state.selectedRowKeys;
     console.log(selectedRows);
@@ -258,25 +233,7 @@ class ListViewSummaryPageData extends Component {
   }
   handleTradPartChange(selected) {
     this.setState({ tradSelected: selected });
-   
-      
   }
-    
-    
-    fieldNameChange(val)
-    {
-        
-         
-    this.setState({ fieldName: val.label });
-        
-    }    fieldNameChange1(val)
-    {
-        
-         console.log("test",val);
-    this.setState({ fieldLabelName: val.label });
-        
-    }
-    
   handleCovYearChange(val) {
     console.log(val);
     this.setState({ covYear: val.label });
@@ -290,14 +247,8 @@ class ListViewSummaryPageData extends Component {
     }
     return `Selected (${selected.length})`;
   }
-    
- 
-  handleFieldFlagChange(selected,options) {
+  handleFieldFlagChange(selected) {
     this.setState({ fieldFlagSelected: selected });
-      
-      var handleMultiSelectRendererArry=[];
-      console.log("handleMultiSelectRendererArry")
-      
   }
   handleRecordFlagChange(selected) {
     this.setState({ recordFlagSelected: selected });
@@ -305,13 +256,11 @@ class ListViewSummaryPageData extends Component {
   handleFieldNameChange(selected) {
     this.setState({ fieldNameSelected: selected });
   }
-     handleFieldNameChange1(selected) {
-    this.setState({ fieldNameSelected1: selected });
-  }
   handleSubmitButton() {
+    debugger;
     console.log('handleSubmitButton()');
     let state = JSON.parse(JSON.stringify(this.state));
-    console.log("handleSubmitButton",state);
+    console.log(state);
     let pass = true;
     let errStr = [];
     // validate covYear
@@ -321,11 +270,7 @@ class ListViewSummaryPageData extends Component {
     }
     // validate moment object
     const startDate = this.refs.fileRunDPicker.refs.input.defaultValue;
-       console.log("startDate111",startDate)
-      console.log("startDate111",!startDate)
-      console.log("startDate111",(startDate.length !== 7))
-      
-    if (!startDate) {
+    if (!startDate || startDate.length !== 7) {
       pass = false;
       errStr[0] = "Field Required";
     }
@@ -356,7 +301,6 @@ class ListViewSummaryPageData extends Component {
       pass = false;
       errStr[5] = "Field Required";
     }
-    
     if (pass) {
       this
         .props
@@ -369,20 +313,12 @@ class ListViewSummaryPageData extends Component {
     console.log(initialState);
     this.setState({
       // startDate: moment(),
-    
-      startDate1: moment().subtract(1, 'month'),
       startDate: moment().subtract(1, 'month'),
       covYear: JSON.parse(JSON.stringify(initialState.covYear)),
       tradSelected: JSON.parse(JSON.stringify(initialState.tradSelected)),
       fieldFlagSelected: JSON.parse(JSON.stringify(initialState.fieldFlagSelected)),
       recordFlagSelected: JSON.parse(JSON.stringify(initialState.recordFlagSelected)),
-      fieldNameSelected: JSON.parse(JSON.stringify(initialState.fieldNameSelected)),
-      fieldNameSelected1: JSON.parse(JSON.stringify(initialState.fieldNameSelected1)),
-             IssuerExSubIDValue:'',
-        issuerFfmPolicyId:'',
-        issuerRecordTraceNumber:'',
-        issuerFirstName:'',
-        issuerLastName:''
+      fieldNameSelected: JSON.parse(JSON.stringify(initialState.fieldNameSelected))
     }, () => {
       console.log("Resetting State");
       console.log(this.state);
@@ -390,242 +326,255 @@ class ListViewSummaryPageData extends Component {
   }
   getItems() {
     const items = [];
-    items.push(
-        <Panel header={`List View Search`} key={'0'}>
-            <Row>
-            <div>
-            <Tabs activeLinkStyle={styles.activeLinkStyle} visibleTabStyle={styles.visibleTabStyle} style={styles.tabs}>
-                <div style={styles.links}>
-                    <TabLink to="tab1" default style={styles.tabLink}>RCNO</TabLink>
-                    <TabLink to="tab2"  style={styles.tabLink}>RCNI</TabLink>
-                </div>
+    console.log("getitems"); console.log(this.props.fieldNameOptions);
 
-                <div style={styles.content}>
-                    <TabContent style={styles.tabContent} for="tab1">
-                    <Row className='display'>
-                        <div style={{ "marginLeft": "3%" }} >
-                            <Column medium={3}>
-                                <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
-                                    File Run Month/Year:*
+
+    var isSearchable = false;
+    var isClearable = false;
+
+    items.push(
+      <Panel header={`List View Search`} key={'0'}>
+        <Row>
+          <div>
+            <Tabs activeLinkStyle={styles.activeLinkStyle} visibleTabStyle={styles.visibleTabStyle} style={styles.tabs}>
+              <div style={styles.links}>
+                <TabLink to="tab1" default style={styles.tabLink}>RCNO</TabLink>
+                <TabLink to="tab2" style={styles.tabLink}>RCNI</TabLink>
+              </div>
+
+              <div style={styles.content}>
+                <TabContent style={styles.tabContent} for="tab1">
+                  <Row className='display'>
+                    <div style={{ "marginLeft": "3%" }} >
+                      <Column medium={3}>
+                        <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
+                          File Run Month/Year:*
                                 <DatePicker
-                                        ref='fileRunDPicker'
-                                        selected={this.state.startDate}
-                                        onChange={this.handleDateChange}
-                                          dateFormat="MM/YYYY"
-                                          placeholderText="MM/YYYY"
-                                          showMonthDropdown
-                                          showYearDropdown
-                                          scrollableYearDropdown />
-                                    <span className="error date-picker-error">{this.state.errStr[0]}</span>
-                                </label>
-                            </Column>
-                        </div>
-                        <Column medium={3} className="multi-select">
-                            <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
-                                Trading Partner ID:*
+                                ref='fileRunDPicker'
+                            selected={this.state.startDate}
+                            onChange={this.handleDateChange}
+                            dateFormat="MM/YYYY"
+                            showMonthDropdown
+                            showYearDropdown
+                            scrollableYearDropdown
+                           />
+                          <span className="error date-picker-error">{this.state.errStr[0]}</span>
+                        </label>
+                      </Column>
+                    </div>
+                    <Column medium={3} className="multi-select">
+                      <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
+                        Trading Partner ID:*
                             <MultiSelect
-                                    options={this.props.tradingPartnerOptions}
-                                    onSelectedChanged={this.handleTradPartChange}
-                                    selected={this.state.tradSelected}
-                                    valueRenderer={this.handleMultiSelectRenderer}
-                                    selectAllLabel={"All"} />
-                                <span className="error">{this.state.errStr[1]}</span>
-                            </label>
-                        </Column>
-                        <div style={{ "marginLeft": "2%" }} >
-                            <Column medium={1} className="record-summary-help-icon">
-                                <ReactHover options={recordFlagHelpHoverOptions}>
-                                    <ReactHover.Trigger>
-                                        <i className="fa fa-question-circle" aria-hidden="true"></i>
-                                    </ReactHover.Trigger>
-                                    <ReactHover.Hover>
-                                        <h1> hello </h1>
-                                    </ReactHover.Hover>
-                                </ReactHover>
-                            </Column>
-                        </div>
-                        <Column medium={2} className="multi-select">
-                            <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
-                                Field Flag:*
+                          options={this.props.tradingPartnerOptions}
+                          onSelectedChanged={this.handleTradPartChange}
+                          selected={this.state.tradSelected}
+                          valueRenderer={this.handleMultiSelectRenderer}
+                          selectAllLabel={"All"} />
+                        <span className="error">{this.state.errStr[1]}</span>
+                      </label>
+                    </Column>
+                    <div style={{ "marginLeft": "2%" }} >
+                      <Column medium={1} className="record-summary-help-icon">
+                        <ReactHover options={recordFlagHelpHoverOptions}>
+                          <ReactHover.Trigger>
+                            <i className="fa fa-question-circle" aria-hidden="true"></i>
+                          </ReactHover.Trigger>
+                          <ReactHover.Hover>
+                            <h1> hello </h1>
+                          </ReactHover.Hover>
+                        </ReactHover>
+                      </Column>
+                    </div>
+                    <Column medium={2} className="multi-select">
+                      <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
+                        Field Flag:*
                              <MultiSelect
-                                    options={this.props.fieldFlagOptions1}
-                                    onSelectedChanged={this.handleFieldFlagChange}
-                                    selected={this.state.fieldFlagSelected}
-                                    valueRenderer={this.handleMultiSelectRenderer}
-                                    selectAllLabel={"All"} />
-                                <span className="error">{this.state.errStr[2]}</span>
-                            </label>
-                        </Column>
-                        <div style={{ "marginLeft": "2%" }} >
-                            <Column medium={1} className="record-summary-help-icon">
-                                <ReactHover options={recordFlagHelpHoverOptions}>
-                                    <ReactHover.Trigger>
-                                        <i className="fa fa-question-circle" aria-hidden="true"></i>
-                                    </ReactHover.Trigger>
-                                    <ReactHover.Hover>
-                                        <div>hello2</div>
-                                    </ReactHover.Hover>
-                                </ReactHover>
-                            </Column>
-                        </div>
-                        <Column medium={2} className="multi-select">
-                            <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
-                                Record Flag:*
+                          options={this.props.fieldFlagOptions}
+                          onSelectedChanged={this.handleFieldFlagChange}
+                          selected={this.state.fieldFlagSelected}
+                          valueRenderer={this.handleMultiSelectRenderer}
+                          selectAllLabel={"All"} />
+                        <span className="error">{this.state.errStr[2]}</span>
+                      </label>
+                    </Column>
+                    <div style={{ "marginLeft": "2%" }} >
+                      <Column medium={1} className="record-summary-help-icon">
+                        <ReactHover options={recordFlagHelpHoverOptions}>
+                          <ReactHover.Trigger>
+                            <i className="fa fa-question-circle" aria-hidden="true"></i>
+                          </ReactHover.Trigger>
+                          <ReactHover.Hover>
+                            <div>hello2</div>
+                          </ReactHover.Hover>
+                        </ReactHover>
+                      </Column>
+                    </div>
+                    <Column medium={2} className="multi-select">
+                      <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
+                        Record Flag:*
                              <MultiSelect
-                                    options={this.props.recordFlagOptions1}
-                                    onSelectedChanged={this.handleRecordFlagChange}
-                                    selected={this.state.recordFlagSelected}
-                                    valueRenderer={this.handleMultiSelectRenderer}
-                                    selectAllLabel={"All"} />
-                                <span className="error">{this.state.errStr[3]}</span>
-                            </label>
-                        </Column>
-                    </Row>
-                    <Row>
-                        <div style={{ "marginLeft": "3%" }} >
-                            <Column medium={3} className='coverage-year'>
-                                <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
-                                    Coverage Year:*
+                          options={this.props.recordFlagOptions}
+                          onSelectedChanged={this.handleRecordFlagChange}
+                          selected={this.state.recordFlagSelected}
+                          valueRenderer={this.handleMultiSelectRenderer}
+                          selectAllLabel={"All"} />
+                        <span className="error">{this.state.errStr[3]}</span>
+                      </label>
+                    </Column>
+                  </Row>
+                  <Row>
+                    <div style={{ "marginLeft": "3%" }} >
+                      <Column medium={3} className='coverage-year'>
+                        <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
+                          Coverage Year:*
                            <Select
-                                        value={this.state.covYear}
-                                        options={this.props.covYearOptions}
-                                        onChange={this.handleCovYearChange} />
-                                    <span className="error">{this.state.errStr[4]}</span>
-                                </label>
-                            </Column>
-                        </div>
-                        <Column medium={4} className="multi-select">
-                            <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
-                                Field Name:*
+                            value={this.state.covYear}
+                            options={this.props.covYearOptions}
+                            onChange={this.handleCovYearChange} />
+                          <span className="error">{this.state.errStr[4]}</span>
+                        </label>
+                      </Column>
+                    </div>
+                    <Column medium={4} className="multi-select">
+                      <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db" }}>
+                        Field Name:*
                           <MultiSelect
-                                    options={this.props.tradingPartnerOptions}
-                                    onSelectedChanged={this.handleFieldNameChange}
-                                    selected={this.state.fieldNameSelected}
-                                    valueRenderer={this.handleMultiSelectRenderer}
-                                    selectAllLabel={"All"} />
-                                <span className="error">{this.state.errStr[5]}</span>
-                            </label>
-                        </Column>
-                    </Row>
-                    <Row>
-                        <br />
-                        <br />
-                        <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db", "fontSize": "1.0rem", "paddingLeft": "20px" }}>
-                            Advanced Search
+                          options={this.props.fieldNameOptions}
+                          onSelectedChanged={this.handleFieldNameChange}
+                          selected={this.state.fieldNameSelected}
+                          valueRenderer={this.handleMultiSelectRenderer}
+                          selectAllLabel={"All"} />
+                        <span className="error">{this.state.errStr[5]}</span>
+                      </label>
+                    </Column>
+                  </Row>
+                  <Row>
+                    <br />
+                    <br />
+                    <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db", "fontSize": "1.0rem", "paddingLeft": "20px" }}>
+                      Advanced Search
               </label>
-                        <br />
-                    </Row>
-                    <Row>
-                        <div style={{ "marginLeft": "3%" }} >
-                            <Column medium={4}>
-                                <label className="formLabel" style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
-                                    Issuer First Name:
-                  <input type="text" name="issuerFirstName"  value={this.state.issuerFirstName} onChange={this.issuerFirstName} />
-                                </label>
-                            </Column>
-                        </div>
-                        <Column medium={4}>
-                            <label className="formLabel" style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
-                                Issuer Last Name:
-                  <input type="text" name="issuerLastName"  value={this.state.issuerLastName} onChange={this.issuerLastName} />
-                            </label>
-                        </Column>
-                        <Column medium={3}>
-                            <label className='formLabel' style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
-                                Issuer DOB:
-                         <DatePicker
-                                    ref='fileRunDPicker'
-                                    selected={this.state.startDate1}
-                                    onChange={this.handleDateChange1}
-                                    placeholderText="MM/DD/YYYY"
-                                    dateFormat="MM/DD/YYYY"
-                                    showYearDropdown
-                                    showMonthDropdown
-                                    scrollableYearDropdown />
-                            </label>
-                        </Column>
-                    </Row>
-                    <Row>
-                        <div style={{ "marginLeft": "3%" }} >
-                            <Column medium={4}>
-                                <label className="formLabel"
-                                    style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
-                                    Issuer Ex Sub ID:
-                  <input type="text" name="issuerExSubId"  value={this.state.IssuerExSubIDValue} onChange={this.issuerExSubID} />
-                                </label>
-                            </Column>
-                        </div>
-                        <Column medium={4}>
-                            <label className="formLabel"
-                                style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
-                                Issuer FFM Policy ID:
-                <input type="text" name="issuerFfmPolicyId"  value={this.state.issuerFfmPolicyId} onChange={this.issuerFfmPolicyId}/>
-                            </label>
-                        </Column>
-                        <Column medium={3}>
-                            <label className="formLabel"
-                                style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
-                                Issuer Record Trace Number:
-              <input type="text" name="issuerRecordTraceNumber" value={this.state.issuerRecordTraceNumber} onChange={this.issuerRecordTraceNumber} />
-                            </label>
-                        </Column>
-                    </Row>
-                    <Row>
-                        <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db", "fontSize": "1.0rem", "paddingLeft": "20px" }}>
-                            Advanced Custom Filter
-              </label>
-                        <br />
-                    </Row>
-                    <Row>
-                        <div style={{ "marginLeft": "3%" }} >
-                            <Column medium={4} className="multi-select">
-                               <label className='formLabel' style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
-                                Field Name:
-                                  <Select
-                                value={this.state.fieldLabelName}
-                                options={this.props.rcnoLstFldNm}
-                                onChange={this.fieldNameChange1} /> 
-                                   {/*  <Select
-                                   name="form-field-name"
-                                  value={this.state.fieldName}
-                                   options={this.props.rcnoLstFldNm}
-                                  onChange={this.logChange} /> */}
-                                         
-                                <span className="error">{this.state.errStr[5]}</span>
-                            </label>
-                            </Column>
-                        </div>
-                        <Column medium={3}>
-                            <label className="formLabel" style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
-                                Field Value:
+                    <br />
+                  </Row>
+                  <Row>
+                    <div style={{ "marginLeft": "3%" }} >
+                      <Column medium={4}>
+                        <label className="formLabel" style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
+                          Issuer First Name:
+                  <input type="text" name="issuerFirstName" />
+                        </label>
+                      </Column>
+                    </div>
+                    <Column medium={4}>
+                      <label className="formLabel" style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
+                        Issuer Last Name:
                   <input type="text" name="issuerLastName" />
-                            </label>
-                        </Column>
-                    </Row>
-                    <Row>
-                        <div className="modal-footer">
-                            <div style={{ "display": "inline", "float": "right", "paddingRight": "0em", "paddingTop": "2em", "marginRight": "20px" }}>
-                                <button className='button primary  btn-lg btn-color formButton' type="button" onClick={this.handleResetButton}> Reset </button>
-                            </div>
-                            <div style={{ "display": "inline", "float": "right", "paddingRight": "1em", "paddingTop": "2em" }}>
-                                <button className='button primary  btn-lg btn-color formButton' type="button" style={{ "backgroundColor": "green" }} onClick={this.handleSubmitButton}> Submit </button>
-                            </div>
-                        </div>
-                    </Row>
-                    <Row>
-                        <br />
-                        <div className="vh150"></div>
-                    </Row>
-                    </TabContent>
-                    <TabContent for="tab2">
-                        <h2>Tab2 content</h2>
-                        <div>¯\_(ツ)_/¯</div>
-                    </TabContent>
-                </div>
+                      </label>
+                    </Column>
+                    <Column medium={3}>
+                      <label className='formLabel' style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
+                        Issuer DOB:
+                            <DatePicker
+                            ref='fileRunDPickerIssuerDOB'
+                            selected={this.state.startDate}
+                            onChange={this.handleDateChange}
+                            dateFormat="MM/YYYY"
+                            placeholderText="MM/YYYY"
+                            showMonthDropdown
+                            showYearDropdown
+                            scrollableYearDropdown />
+
+
+                      </label>
+                    </Column>
+                  </Row>
+                  <Row>
+                    <div style={{ "marginLeft": "3%" }} >
+                      <Column medium={4}>
+                        <label className="formLabel"
+                          style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
+                          Issuer Ex Sub ID:
+                  <input type="text" name="issuerExSubId" />
+                        </label>
+                      </Column>
+                    </div>
+                    <Column medium={4}>
+                      <label className="formLabel"
+                        style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
+                        Issuer FFM Policy ID:
+                  <input type="text" name="issuerFfmPolicyId" />
+                      </label>
+                    </Column>
+                    <Column medium={3}>
+                      <label className="formLabel"
+                        style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
+                        Issuer Record Trace Number:
+                  <input type="text" name="issuerRecordTraceNumber" />
+                      </label>
+                    </Column>
+                  </Row>
+                  <Row>
+                    <label className='formLabel' style={{ "display": "inline", "fontWeight": "bold", "color": "#3498db", "fontSize": "1.0rem", "paddingLeft": "20px" }}>
+                      Advanced Custom Filter
+              </label>
+                    <br />
+                  </Row>
+                  <Row>
+                    <div style={{ "marginLeft": "3%" }} >
+                      <Column medium={4}>
+                        <label className='formLabel' style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
+                          Field Name:
+                                <Select
+                            searchable={isSearchable}
+                            clearable={isClearable}
+                            name="advancefieldname"
+                            value="one"
+                            options={this.props.fieldNameOptions}
+                            onChange={this.handleFieldNameChange} />
+                        </label>
+                      </Column>
+                    </div>
+                    <Column medium={3}>
+                      <label className="formLabel" style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
+                        Field Value:
+                  <input type="text" name="issuerLastName" />
+                      </label>
+                    </Column>
+                    <div style={{ "paddingTop": "22px" }}>
+                      <Column medium={3}>
+                        <label className="formLabel" style={{ "display": "inline", "fontWeight": "500", "color": "#3498db" }}>
+
+                          <i className="fa fa-plus-circle fa-3x" style={{ "cursor": "pointer" }} aria-hidden="true"></i>
+                        </label>
+
+                      </Column>
+                    </div>
+                  </Row>
+                  <Row>
+                    <div className="modal-footer">
+                      <div style={{ "display": "inline", "float": "right", "paddingRight": "0em", "paddingTop": "2em", "marginRight": "20px" }}>
+                        <button className='button primary  btn-lg btn-color formButton' type="button" onClick={this.handleResetButton}> Reset </button>
+                      </div>
+                      <div style={{ "display": "inline", "float": "right", "paddingRight": "1em", "paddingTop": "2em" }}>
+                        <button className='button primary  btn-lg btn-color formButton' type="button" style={{ "backgroundColor": "green" }} onClick={this.handleSubmitButton}> Submit </button>
+                      </div>
+                    </div>
+                  </Row>
+                  <Row>
+                    <br />
+                    <div className="vh150"></div>
+                  </Row>
+                </TabContent>
+                <TabContent for="tab2">
+                  <h2>Tab2 content for List View</h2>
+                  <div>¯\_(ツ)_/¯</div>
+                </TabContent>
+              </div>
             </Tabs>
-        </div>
-          </Row>
-                {/* <Row>
+          </div>
+        </Row>
+        {/* <Row>
           <div className="vh200"></div>
           <Column medium={3} offsetOnMedium={9}>
             <Button color={Colors.PRIMARY} onClick={this.handleResetButton} isHollow>Reset</Button>
@@ -635,11 +584,11 @@ class ListViewSummaryPageData extends Component {
           <br/>
           <div className="vh150"></div>
         </Row> */}
-            </Panel>
-        );
+      </Panel>
+    );
     items.push(
-      <Panel header={`Search Result`} key={'1'}>
-      {/*  <div className={'display-' + !this.state.showTable}
+      <Panel header={`Search Result `} key={'1'}>
+        <div className={'display-' + !this.state.showTable}
           style={{ "textAlign": "center", "color": "darkgoldenrod", "fontWeight": "bolder", "fontStyle": "italic", "fontFamily": "serif", "fontSize": "26px" }}>
           <p className={'display-' + !this.state.showSpinner}>No Data Available for selected Range</p>
           <Spinner
@@ -647,27 +596,22 @@ class ListViewSummaryPageData extends Component {
             spinnerColor={"#5dade2"}
             spinnerWidth={2}
             visible={this.state.showSpinner && !this.state.showTable} />
-        </div> 
-        <div className={'display-' + this.state.showTable} >
-             */}
-            <div>
+        </div>
+       {/* <div className={'display-' + this.state.showTable}> */}
+            <div> 
           <br /><br />
-      
-                
-                 <BootstrapTable data={this.props.rcnoListViewResTable} striped hover>
-      <TableHeaderColumn isKey dataField='recordIdentifier' width={'200'}>recordIdentifier</TableHeaderColumn>
-      <TableHeaderColumn dataField='rcnoFirstName' width={'150'}>rcnoFirstName</TableHeaderColumn>
-      <TableHeaderColumn dataField='rcnoLastName' width={'150'}>rcnoLastName</TableHeaderColumn>
-      <TableHeaderColumn dataField='rcnoExchSubId' width={'150'}>rcnoExchSubId</TableHeaderColumn>
-      <TableHeaderColumn dataField='rcnoSocSecNum' width={'150'}>rcnoSocSecNum</TableHeaderColumn>
-      <TableHeaderColumn dataField='rcnoContractId' width={'150'}>rcnoContractId</TableHeaderColumn>
-      <TableHeaderColumn dataField='rcnoFFMPolicyId' width={'150'}>rcnoFFMPolicyId</TableHeaderColumn>
-      <TableHeaderColumn dataField='overallInd' width={'150'}>overallInd</TableHeaderColumn>
-  </BootstrapTable>
-                
-                
-                
-        {/*   <BootstrapTable
+            
+                        <div>
+        <BootstrapTable
+          data={ products }
+          pagination>
+          <TableHeaderColumn dataField='id' isKey>Product ID</TableHeaderColumn>
+          <TableHeaderColumn dataField='name'>Product Name</TableHeaderColumn>
+          <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn>
+        </BootstrapTable>
+      </div>
+            
+          {/* <BootstrapTable
             data={this.state.summaryTableData}
             height='300'
             scrollTop={'Top'}
@@ -696,7 +640,29 @@ class ListViewSummaryPageData extends Component {
                 )
               })
             }
-          </BootstrapTable>  */}
+          </BootstrapTable> */}
+          <br /><br />
+            
+            
+   
+            
+       {/*   <BootstrapTable
+            data={this.state.summaryTableData}
+            className="record-summary-details-result-table"
+            height='300'
+            scrollTop={'Top'}
+            ref='table'
+            selectRow={this.state.selectRowProp}
+            options={this.state.tableOptions}>
+            <TableHeaderColumn dataField='recordIdentifier'>recordIdentifier</TableHeaderColumn>
+            <TableHeaderColumn dataField='rcnoFirstName'>rcnoFirstName</TableHeaderColumn>
+            <TableHeaderColumn dataField='rcnoLastName'>rcnoLastName</TableHeaderColumn>
+            <TableHeaderColumn dataField='rcnoExchSubId'>rcnoExchSubId</TableHeaderColumn>
+            <TableHeaderColumn dataField='rcnoSocSecNum'>rcnoSocSecNum</TableHeaderColumn>
+            <TableHeaderColumn dataField='rcnoContractId' isKey={true}>rcnoContractId</TableHeaderColumn>
+            <TableHeaderColumn dataField='rcnoFFMPolicyId'>rcnoFFMPolicyId</TableHeaderColumn>
+            <TableHeaderColumn dataField='overallInd'>overallInd</TableHeaderColumn>
+          </BootstrapTable>*/}
           <br />
           <Row>
             {/* <Column medium={1} offsetOnMedium={10}> */}
@@ -755,6 +721,8 @@ class ListViewSummaryPageData extends Component {
     );
   }
   componentWillReceiveProps(nextProps) {
+    debugger;
+    console.log("props"); console.log(this.state.fieldNameOptions); console.log(this.props.fieldNameOptions)
     if (this.state.fieldNameOptions.length == 0 && nextProps.fieldNameOptions.length > 0) {
       this.setState({ fieldNameOptions: nextProps.fieldNameOptions });
     }
@@ -764,7 +732,52 @@ class ListViewSummaryPageData extends Component {
     if (this.state.fieldFlagOptions.length == 0 && nextProps.fieldFlagOptions.length > 0) {
       this.setState({ fieldFlagOptions: nextProps.fieldFlagOptions });
     }
+    
+
+    
+
+    if (this.state.lastDataReceived < nextProps.lastDataReceived) {
+      if (nextProps.summaryTableData == undefined || Object.keys(nextProps.summaryTableData).length === 0) {
+        console.log("No Table Data");
+        this.setState({showSpinner: false, showTable: false, lastDataReceived: nextProps.lastDataReceived})
+      } else {
+
+
+        this.setState({
+          showSpinner: false,
+          showTable: true,
+          lastDataReceived: nextProps.lastDataReceived
+        });
+      
+        /*
+        let tableData = nextProps.summaryTable;
+        let tableHeaders = tableData.headerSet;
+        let summaryTableData = [];
+        let rMap = tableData.responseMap;
+        for (let key in rMap) {
+          let row = {
+            flag: key
+          };
+          let rowData = rMap[key];
+          for (let i in rowData) {
+            row[i] = rowData[i];
+          }
+          summaryTableData.push(row);
+        }
+        console.log(summaryTableData);
+        this.setState({
+          showSpinner: false,
+          showTable: true,
+          lastDataReceived: nextProps.lastDataReceived
+        }, () => {
+          this.setState({tableHeaders, summaryTableData})
+        })
+      
+      */
+    }
   }
+}
+  
   componentDidMount() {
     console.log("componentDidMount()");
     if (initialState === undefined) {
@@ -773,11 +786,10 @@ class ListViewSummaryPageData extends Component {
         tradSelected: JSON.parse(JSON.stringify(this.state.tradSelected)),
         fieldFlagSelected: JSON.parse(JSON.stringify(this.state.fieldFlagSelected)),
         recordFlagSelected: JSON.parse(JSON.stringify(this.state.recordFlagSelected)),
-        fieldNameSelected: JSON.parse(JSON.stringify(this.state.fieldNameSelected)),
-        fieldNameSelected1: JSON.parse(JSON.stringify(this.state.fieldNameSelected1)),
-        fieldLabelName:JSON.parse(JSON.stringify(this.state.fieldLabelName))        
+        fieldNameSelected: JSON.parse(JSON.stringify(this.state.fieldNameSelected))
       };
-      console.log("initialState:",initialState);
+      console.log(initialState);
+      console.log(this.state);
     }
   }
 }
@@ -789,6 +801,3 @@ class ListViewSummaryPageData extends Component {
 
 ListViewSummaryPageData.propTypes = {};
 export default ListViewSummaryPageData;
-
-
-

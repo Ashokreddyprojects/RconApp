@@ -32,163 +32,42 @@ const tradingPartnerOptions = [
         value: 2
     }
 ];
-
-const rcnoLstFldNm = [
-    {
-        label: 'FFM Last Name',
-        id: 'FFM_MBR_LAST_NM',
-        value: 0
-    }, {
-        label: 'FFM Member Middle Name',
-        id: 'FFM_MBR_MIDL_NM',
-        value: 1
-    }, {
-        label: 'FFM DOB',
-        id: 'FFM_BTH_DT',
-        value: 2
-    }
-];
-
-
-
-
-
-
-var rcnoListViewResTable = [{
-      "recordIdentifier": "RCNI170630115000005",
-      "rcnoFirstName": "ERIN",
-      "rcnoLastName": "HILL",
-      "rcnoExchSubId": "0001567297",
-      "rcnoSocSecNum": "770404680",
-      "rcnoContractId": "RCNI17063",
-      "rcnoFFMPolicyId": "H10162144",
-      "overallInd": "M"
-   },
-      {
-      "recordIdentifier": "RCNI170630115000006",
-      "rcnoFirstName": "TOMMY",
-      "rcnoLastName": "PIIRA",
-      "rcnoExchSubId": "0001798469",
-      "rcnoSocSecNum": "594957396",
-      "rcnoContractId": "RCNI17063",
-      "rcnoFFMPolicyId": "H10166177",
-      "overallInd": "M"
-   },
-      {
-      "recordIdentifier": "RCNI170630115000015",
-      "rcnoFirstName": "JACK",
-      "rcnoLastName": "SHANHOLTZ",
-      "rcnoExchSubId": "0002417445",
-      "rcnoSocSecNum": "356940018",
-      "rcnoContractId": "RCNI17063",
-      "rcnoFFMPolicyId": "H10202275",
-      "overallInd": "C"
-   }];
-
-
 //----------------------Field Flag Options without service-----------------
- const fieldFlagOptions = {
-     "fieldLvlList": [
-         "C",
-         "D",
-         "F",
-         "G",
-         "I",
-         "J",
-         "K",
-         "L",
-         "M",
-         "NA",
-         "U"
-    ]
- };
+// const fieldFlagOptions = {
+//     "fieldLvlList": [
+//         "C",
+//         "D",
+//         "F",
+//         "G",
+//         "I",
+//         "J",
+//         "K",
+//         "L",
+//         "M",
+//         "NA",
+//         "U"
+//    ]
+// };
 //----------------------Record Flag Options without service-----------------
- const recordFlagOptions = {
-     "recordLvlList": [
-         "B",
-         "C",
-         "D",
-         "E",
-         "F",
-         "G",
-         "I",
-         "L",
-         "M",
-         "N",
-         "P",
-         "R",
-         "U",
-         "W",
-         "Z"
-     ]
- };
-
- const recordFlagOptions1=
-[
-{value: 0, label: "C"},
-
-{value: 1, label: "D"},
-
-{value: 2, label: "F"},
-
-{value: 3, label: "G"},
-
-{value: 4, label: "I"},
-
-{value: 5, label: "J"},
-
-{value: 6, label: "K"},
-
-{value: 7, label: "L"},
-
-{value: 8, label: "M"},
-
-{value: 9, label: "NA"},
-
-{value: 10, label: "U"}
-];
-
-
-
-
-
-
-const fieldFlagOptions1=[
-{value: 0, label: "B"},
-
-{value: 1, label: "C"},
-
-{value: 2, label: "D"},
-
-{value: 3, label: "E"},
-
-{value: 4, label: "F"},
-
-{value: 5, label: "G"},
-
-{value: 6, label: "I"},
-
-{value: 7, label: "L"},
-
-{value: 8, label: "M"},
-
-{value: 9, label: "N"},
-
-{value: 10, label: "P"},
-
-{value: 11, label: "R"},
-
-{value: 12, label: "U"},
-
-{value: 13, label: "W"},
-
-{value: 14, label: "Z"}
-];
-
-
-//----------------------Record Flag Options convert object-----------------
-
-
+// const recordFlagOptions = {
+//     "recordLvlList": [
+//         "B",
+//         "C",
+//         "D",
+//         "E",
+//         "F",
+//         "G",
+//         "I",
+//         "L",
+//         "M",
+//         "N",
+//         "P",
+//         "R",
+//         "U",
+//         "W",
+//         "Z"
+//     ]
+// };
 //----------------------Field Name Options without service-----------------
 // const fieldNameOptions = {
 //     "rcnoFieldNameList": [
@@ -244,26 +123,139 @@ const fieldFlagOptions1=[
 //         "Total-Premium-End-Date"
 //     ]
 // };
+
+const fieldNameOptions = [
+    {value: "onev",lebel: "onel"},
+    {value: "twov",lebel: "twol"},
+    {value: "onev1",lebel: "onel1"},
+    {value: "twov1",lebel: "twol1"}
+];
+
+const summaryTableData = [
+    {
+        "recordIdentifier": "Non-Match with Issuer Action",
+        "rcnoFirstName": "A",
+        "rcnoLastName": "10007",
+        "rcnoExchSubId": "0.67",
+        "rcnoSocSecNum": "rcnoSocSecNum",
+        "rcnoContractId": "RCNI17063",
+        "rcnoFFMPolicyId": "H10162144",
+        "overallInd": "M"
+    },
+    {
+        "recordIdentifier": "11Non-Match with Issuer Action",
+        "rcnoFirstName": "B",
+        "rcnoLastName": "10007",
+        "rcnoExchSubId": "0.67",
+        "rcnoSocSecNum": "rcnoSocSecNum",
+        "rcnoContractId": "RCNI17",
+        "rcnoFFMPolicyId": "H10162144",
+        "overallInd": "M"
+    }
+];
+let resultData =
+{"rcnoListViewRes": [
+      {
+      "recordIdentifier": "RCNI170630115000005",
+      "rcnoFirstName": "ERIN",
+      "rcnoLastName": "HILL",
+      "rcnoExchSubId": "0001567297",
+      "rcnoSocSecNum": "770404680",
+      "rcnoContractId": "RCNI17063",
+      "rcnoFFMPolicyId": "H10162144",
+      "overallInd": "M"
+   },
+      {
+      "recordIdentifier": "RCNI170630115000006",
+      "rcnoFirstName": "TOMMY",
+      "rcnoLastName": "PIIRA",
+      "rcnoExchSubId": "0001798469",
+      "rcnoSocSecNum": "594957396",
+      "rcnoContractId": "RCNI17063",
+      "rcnoFFMPolicyId": "H10166177",
+      "overallInd": "M"
+   },
+      {
+      "recordIdentifier": "RCNI170630115000015",
+      "rcnoFirstName": "JACK",
+      "rcnoLastName": "SHANHOLTZ",
+      "rcnoExchSubId": "0002417445",
+      "rcnoSocSecNum": "356940018",
+      "rcnoContractId": "RCNI17063",
+      "rcnoFFMPolicyId": "H10202275",
+      "overallInd": "C"
+   }
+]}
+
 class ListViewSummaryPage extends Component {
     constructor(props) {
         super(props);
         this.state = this.getInitialState();
-        ['apiCallFunction' , 'handleSubmit', 'getInputFields'].map(fn => this[fn] = this[fn].bind(this));
+    
+        ['handleSubmit', 'getInputFields','getResultSummary', 'buildUrl'].map(fn => this[fn] = this[fn].bind(this));
+        //this.dummy();
     }
-    
-  
-    
-    
+    dummy(){
+            // Dummy Code for Testing;
+            let response = resultData;
+            let data = response.rcnoListViewRes;
+            setTimeout(() => {
+                this.setState({
+                    lastDataReceived: Date.now(),
+                    summaryTableData: data,
+                    
+                });
+            }, 2000);
+    }
+    buildUrl(parameters) {
+        let url = rcnorcni.GET_FIELD_SUMMARY_DETAILS_URL;
+        let qs = "";
+        for (let key in parameters) {
+            let value = parameters[key];
+            qs += key + "=" + value + "&";
+        }
+        if (qs.length > 0) {
+            qs = qs.substring(0, qs.length - 1); //chop off last "&"
+            url = url + "?" + qs;
+        }
+        return url;
+    }
+    getResultSummary(args) {
+        let url = this.buildUrl(args);
+        // Get Field Flags
+        fetch(rcnorcni.GET_LIST_VIEW_SUMMARY_URL, {
+            method: 'POST',     body: args
+        }).then((response) => {
+            if (!response.ok) {
+                throw new Error("Bad response from server");
+            }
+            return response.json();
+        }).then((response) => {
+            let data = response;
+            this.setState({
+                lastDataReceived: Date.now(),
+                summaryTableData: data
+            });
+        }).catch((error) => {
+            // Dummy Code for Testing;
+            let response = resultData;
+            let data = response.rcnoListViewRes;
+            setTimeout(() => {
+                this.setState({
+                    lastDataReceived: Date.now(),
+                    summaryTableData: data
+                });
+            }, 2000);
+        })
+    }
+
+
+
     getInitialState() {
         const defaultTradingPartners = [0, 1, 2];
         const defaultRecordFlags = [3, 9, 10];
         const defaultFieldFlags = [4, 5, 6, 7];
-        const defaultFieldNames = [0, 1, 2];
-        
-        const defaultFieldNames1 = [0, 1, 2];
-        const defaultFieldLabelNames = "FFM Last Name";
-        const defaultrecordFlagOptions1 = [0, 1, 2,3,4,5,6,7,8,9,10];
-        const defaultfieldFlagOptions1 = [0, 1, 2,3,4,5,6,7,8,9,10,11,12,13,14];
+        const defaultFieldNames = [0, 1, 2, 3, 4];
 
 
 
@@ -274,27 +266,21 @@ class ListViewSummaryPage extends Component {
                 .format('MM/YYYY'),
             covYear: parseInt(moment().format('YYYY')),
             defaultTradingPartners,
-            summaryTableData: [],
-            fieldNameOptions: [],
+            summaryTableData: summaryTableData,
+            fieldNameOptions: fieldNameOptions,
             summaryTable: undefined,
-            rcnoListViewResTable:undefined,
             recordFlagOptions: [],
             fieldFlagOptions: [],
             lastDataReceived: Date.now(),
             defaultFieldNames,
-            defaultFieldNames1,
-            defaultrecordFlagOptions1,
-            defaultfieldFlagOptions1,
             defaultFieldFlags,
-            defaultRecordFlags,
-            defaultFieldLabelNames
+            defaultRecordFlags
         };
 
     }
     handleSubmit(item) {
-        console.log("ListViewSummaryPage")
-        console.dir(item.state);
-       /* let tradSelected = item.state.tradSelected.length == tradingPartnerOptions.length
+        console.dir(item);
+        let tradSelected = item.state.tradSelected.length == tradingPartnerOptions.length
             ? 'all'
             : undefined;
         if (tradSelected === undefined) {
@@ -345,29 +331,15 @@ class ListViewSummaryPage extends Component {
                     fieldNameSelected += this.state.fieldNameOptions[f].label + ',';
                 })
             fieldNameSelected = fieldNameSelected.slice(0, -1);
-        }*/
-        
-               this.apiCallFunction( {
-        "name": "paul rudd",
-        "movies": ["I Love You Man", "Role Models"]
-    });
-        
-//                 this.apiCallFunction({
-//  "frmDate": "06/2017",
-//  "tpId" : "ALL",
-//  "cvgYear" : "2017",
-//  "rcdFlag" : "ALL",
-//  "fldFlag" : "ALL",
-//  "fldName" : "ALL", 
-//});
-        // this.getResultSummary({
-        //     fromDate: moment(item.state.startDate).format('MM/YYYY'),
-        //     coverageYear: item.state.covYear,
-        //     tradingPartnerId: tradSelected,
-        //     recordFlag: recordFlagSelected,
-        //     fieldFlag: fieldFlagSelected,
-        //     fieldName: fieldNameSelected
-        // });
+        }
+        this.getResultSummary({
+            fromDate: moment(item.state.startDate).format('MM/YYYY'),
+            coverageYear: item.state.covYear,
+            tradingPartnerId: tradSelected,
+            recordFlag: recordFlagSelected,
+            fieldFlag: fieldFlagSelected,
+            fieldName: fieldNameSelected
+        });
     }
     render() {
         return (
@@ -424,20 +396,12 @@ class ListViewSummaryPage extends Component {
                             </div>
                             <br /> */}
                             <ListViewSummaryPageData
-                                defaultFieldLabelNames={this.state.defaultFieldLabelNames}
-                                
-                            
-                            
-                                rcnoListViewResTable={this.state.rcnoListViewResTable}
-                                rcnoLstFldNm={rcnoLstFldNm}
-                                tradingPartnerOptions={tradingPartnerOptions}
                                 covYearOptions={covYearOptions}
                                 lastDataReceived={this.state.lastDataReceived}
                                 defaultCovYear={this.state.covYear}
                                 defaultRecordFlags={this.state.defaultRecordFlags}
                                 defaultFieldFlags={this.state.defaultFieldFlags}
                                 defaultFieldNames={this.state.defaultFieldNames}
-                                defaultFieldNames1={this.state.defaultFieldNames1}
                                 defaultTradingPartners={this.state.defaultTradingPartners}
                                 tradingPartnerOptions={tradingPartnerOptions}
                                 fieldFlagOptions={this.state.fieldFlagOptions}
@@ -445,14 +409,6 @@ class ListViewSummaryPage extends Component {
                                 fieldNameOptions={this.state.fieldNameOptions}
                                 summaryTableData={this.state.summaryTableData}
                                 summaryTable={this.state.summaryTable}
-                                
-                                
-                                recordFlagOptions1={recordFlagOptions1}
-                                defaultrecordFlagOptions1={this.state.defaultrecordFlagOptions1}
-                                
-                                fieldFlagOptions1={fieldFlagOptions1}
-                                defaultfieldFlagOptions1={this.state.defaultfieldFlagOptions1}
-                                
                                 handleSubmit={this.handleSubmit} />
                         </Column>
                     </Row>
@@ -461,26 +417,11 @@ class ListViewSummaryPage extends Component {
         );
     }
     componentDidMount() {
-        
-//    this.apiCallFunction({
-//  "frmDate": "06/2017",
-//  "tpId" : "ALL",
-//  "cvgYear" : "2017",
-//  "rcdFlag" : "ALL",
-//  "fldFlag" : "ALL",
-//  "fldName" : "ALL", 
-//});
-        
-         this.apiCallFunction( {
-        "name": "paul rudd",
-        "movies": ["I Love You Man", "Role Models"]
-    });
-        
-        
         this.getInputFields();
     }
     getInputFields() {
         // Get Field Name
+        this.setState({ fieldNameOptions: fieldNameOptions });
         fetch(rcnorcni.GET_FIELD_NAME_INPUT_URL, { method: 'GET', credentials: "same-origin"  }).then((response) => {
             if (!response.ok) {
                 throw new Error("Bad response from server");
@@ -505,13 +446,6 @@ class ListViewSummaryPage extends Component {
             });
         }).catch((error) => {
             console.log(error);
-            // Dummy Code without service;
-            // let response = fieldNameOptions;
-            // let data = response.rcnoFieldNameList;
-            // data = data.map((d, index) => {
-            //     return {value: index, label: d}
-            // });
-            // this.setState({fieldNameOptions: data});
         })
         // Get Record Flags
         fetch(rcnorcni.GET_RECORD_FLAG_INPUT_URL, { method: 'GET', credentials: "same-origin"  }).then((response) => {
@@ -528,13 +462,6 @@ class ListViewSummaryPage extends Component {
             this.setState({ recordFlagOptions: data });
         }).catch((error) => {
             console.log(error);
-            // Dummy Code without service;
-            // let response = recordFlagOptions;
-            // let data = response.recordLvlList;
-            // data = data.map((d, index) => {
-            //     return {value: index, label: d}
-            // });
-            // this.setState({recordFlagOptions: data});
         })
         // Get Field Flags
         fetch(rcnorcni.GET_FIELD_FLAG_INPUT_URL, { method: 'GET', credentials: "same-origin"  }).then((response) => {
@@ -551,66 +478,23 @@ class ListViewSummaryPage extends Component {
             this.setState({ fieldFlagOptions: data });
         }).catch((error) => {
             console.log(error);
-            // Dummy Code without service;
-            // let response = fieldFlagOptions;
-            // let data = response.fieldLvlList;
-            // data = data.map((d, index) => {
-            //     return {value: index, label: d}
-            // });
-            // this.setState({fieldFlagOptions: data});
         })
-    }
-    
-    
-    apiCallFunction(argsApi)
-    {
-          console.log("argsApi");
-          console.log(argsApi);
-        //----------------------your api service call-----------------
-         var url="https://reqres.in/api/users";
-        //----------------------your api service call-----------------
-               
-            fetch(url, {
-            method: "POST", credentials: "same-origin",
-            body: argsApi,
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
+
+        // Get SummeryTab data
+        fetch(rcnorcni.GET_LIST_VIEW_SUMMARY_URL, { method: 'POST', credentials: "same-origin"  }).then((response) => {
+            if (!response.ok) {
+                throw new Error("Bad response from server");
             }
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw Error(response.statusText);
-                }
-                 return response.json();
-            })
-            .then((response) => {
-                console.log("response");
+            return response.json();
+        }).then((response) => {
             console.log(response);
-             
-//           this.setState({
-//                    rcnoListViewResTable: response.rcnoListViewRes
-//                });
-        })
-            .catch((error) => {
+            let data = response.rcnoListViewRes;
+            this.setState({ summaryTableData: data });
+        }).catch((error) => {
             console.log(error);
-                 console.log("catch function");
-//            // Dummy Code for Testing;
-//            let response = rcnoListViewResTable;
-//            let data = response;
-//          
-//                this.setState({rcnoListViewResTable: rcnoListViewResTable});
-//         
-//                
-//                console.log(this.state.rcnoListViewResTable);
         })
-        
-        
     }
 
 }
 ListViewSummaryPage.propTypes = {};
 export default ListViewSummaryPage;
-
-
-
